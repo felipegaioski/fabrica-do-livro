@@ -16,14 +16,14 @@ Aplicação desenvolvida para teste prático da empresa Fábrica do Livro.
 
 - Na pasta "laravel":
     - Execute o comando "composer i" ou "composer u".
-    - Faça uma cópia do arquivo ".env.example" e renomeie-o para ".env". No item "DB_DATABASE" insira o nome que deu ao banco de dados ao criá-lo.
+    - Faça uma cópia do arquivo ".env.example" e renomeie-o para ".env". No item "DB_DATABASE" insira o nome que deu ao banco de dados ao criá-lo. Altere o usuário e a senha, se necessário.
     - Execute o comando "php artisan key:generate"
     - Execute o comando "php artisan jwt:secret"
     - Execute o comando "php artisan serve" para iniciar o Laravel.
 
 - Na pasta "react":
     - Certifique-se de usar a versão correta do Node.
-    - Execute o comando "npm install".
+    - Execute o comando "npm i".
     - Execute o comando "npm run dev" para iniciar o React.
 
 - Inicie seu banco de dados.
