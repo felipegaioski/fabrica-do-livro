@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Tasks;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -11,7 +11,7 @@ class UpdateTaskRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,6 +25,7 @@ class UpdateTaskRequest extends FormRequest
             'title' => ['required', 'string'],
             'description' => 'nullable',
             'status_id' => 'nullable',
+            'completed_at' => ['required_if:status_id,2', 'date'],
         ];
     }
 

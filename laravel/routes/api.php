@@ -13,6 +13,14 @@ Route::middleware('auth:api')->group(function() {
     Route::get('/me', 'App\Http\Controllers\Api\AuthController@me');
     Route::get('/users', 'App\Http\Controllers\Api\UserController@get');
 
+    // Tasks
+    Route::apiResource('/tasks', 'App\Http\Controllers\Api\TaskController');
+    Route::get('/tasks', 'App\Http\Controllers\Api\TaskController@get');
+    Route::get('/tasks/{id}', 'App\Http\Controllers\Api\TaskController@find');
+
+    // Statuses
+    Route::get('/statuses', 'App\Http\Controllers\Api\StatusController@get');
+
     // Constructions
     Route::apiResource('/constructions', 'App\Http\Controllers\Api\ConstructionController');
     Route::get('/constructions', 'App\Http\Controllers\Api\ConstructionController@get');

@@ -13,6 +13,8 @@ class AuditFormatter
         'App\Models\Measurement' => 'Medição',
         'App\Models\Unit' => 'Unidade',
         'App\Models\UnitCategory' => 'Categoria de unidade',
+        'App\Models\Status' => 'Status',
+        'App\Models\Task' => 'Tarefa'
     ];
 
     protected static function translateModel(string $class): string

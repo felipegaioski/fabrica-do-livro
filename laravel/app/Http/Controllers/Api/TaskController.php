@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Traits\ApiQueryBuilder;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TaskResource;
+use App\Http\Requests\Tasks\StoreTaskRequest;
+use App\Http\Requests\Tasks\UpdateTaskRequest;
 
 class TaskController extends Controller
 {
@@ -104,6 +109,10 @@ class TaskController extends Controller
 
             $data = $request->validated();
 
+            if (isset($data['completed_at']) && !empty($data['completed_at'])) {
+                $data['completed_at'] = date('Y-m-d H:i:s', strtotime($data['completed_at']));
+            }
+
             $task->update($data);
             
             DB::commit();
@@ -122,7 +131,6 @@ class TaskController extends Controller
         try {
             DB::beginTransaction();
 
-            $task->measurements()->delete();
             $task->delete();
 
             DB::commit();
