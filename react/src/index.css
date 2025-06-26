@@ -50,16 +50,31 @@ h1, h2, h3, h4, h5, h6, p {
     color: var(--color-text-primary) !important;
 }
 
-label, input {
+label, input, textarea {
     color: var(--color-text-primary) !important;
 }
 
 textarea {
-    background-color: var(--color-elevated);
+    /* background-color: var(--color-elevated);
     border: var(--color-border);
     border-radius: 10px;
     padding: 10px;
-    color: var(--color-text-primary) !important;
+    color: var(--color-text-primary) !important; */
+
+    outline: 0;
+    background: var(--color-surface);
+    width: 100%;
+    border: 2px solid var(--color-border);
+    border-radius: 10px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    /* transition: all 0.3s; */
+}
+
+textarea:focus {
+    border-color: var(--primary);
 }
 
 select {
@@ -84,6 +99,7 @@ input {
     background: var(--color-surface);
     width: 100%;
     border: 2px solid var(--color-border);
+    border-radius: 10px;
     margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
@@ -98,6 +114,7 @@ input:focus {
 .btn,
 .btn-add,
 .btn-edit,
+.btn-success,
 .btn-delete {
     font-family: "Roboto", sans-serif;
     outline: 0;
@@ -119,6 +136,7 @@ input:focus {
 
 .btn-add,
 .btn-edit,
+.btn-success,
 .btn-delete{
     padding: 0.5rem 0.75rem;
     font-size: 14px;
@@ -129,6 +147,12 @@ input:focus {
 }
 .btn-delete {
     background-color: #b72424 !important;
+}
+.btn-success {
+    background-color: var(--color-success) !important;
+    /* background-color: transparent !important;
+    border: 1px solid var(--color-success) !important;
+    color: var(--color-success) !important; */
 }
 .btn-edit {
     background-color: var(--color-primary) !important;
@@ -449,4 +473,13 @@ table > tbody > tr > td {
 
 .sidemenu-icon {
     padding: 0 0.5rem;
+}
+
+.completion-date {
+    font-size: small;
+    color: var(--color-success);
+}
+
+.filters input {
+    font-size: 12px;
 }

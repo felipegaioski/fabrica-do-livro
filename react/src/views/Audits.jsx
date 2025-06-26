@@ -16,6 +16,8 @@ export default function Audits() {
         setLoading(true);
         getAudits({ page }, [])
             .then(({ data }) => {
+                console.log(data);
+                
                 setAudits(data.data);
                 setPagination({
                     currentPage: data.current_page,

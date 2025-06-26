@@ -2,31 +2,31 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../api/axios-client.js";
 import { useStateContext } from "../contexts/ContextProvider.jsx";
-import { getConstruction } from "../services/ConstructionService.js";
-import { storeConstruction, updateConstruction } from '../services/ConstructionService.js';
+import { getTask } from "../services/TaskService.js";
+import { storeTask, updateTask } from '../services/TaskService.js';
 
-export default function ConstructionForm() {
+export default function TaskForm() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState(null);
     const {setNotification} = useStateContext();
-    const [construction, setConstruction] = useState({
+    const [task, setTask] = useState({
         id: null,
-        name: '',
+        title: '',
         description: '',
-        address: '',
+        status_id: 1,
     });
 
     useEffect(() => {
         if (!id) return;
         setLoading(true);
-        getConstruction(id, {})
+        getTask(id, {})
             .then(({ data }) => {
-                if (data.construction) {
-                    setConstruction(data.construction);
+                if (data.task) {
+                    setTask(data.task);
                 } else {
-                    setConstruction(data);
+                    setTask(data);
                 }
                 
                 setLoading(false);
@@ -39,30 +39,37 @@ export default function ConstructionForm() {
     const onSubmit = (ev) => {
         ev.preventDefault();
 
-        const request = construction.id
-            ? updateConstruction(construction.id, construction)
-            : storeConstruction(construction);
+        const request = task.id
+            ? updateTask(task.id, task)
+            : storeTask(task);
 
         request
             .then(({ data }) => {
                 setNotification(
-                    construction.id
-                        ? 'Obra atualizada com sucesso!'
-                        : 'Obra criada com sucesso!'
+                    task.id
+                        ? 'Tarefa atualizada com sucesso!'
+                        : 'Tarefa criada com sucesso!'
                 );
-                navigate('/constructions');
+                navigate('/tasks');
             })
             .catch((err) => {
                 const response = err.response;
                 if (response && response.status === 422) {
                     setErrors(response.data.errors);
+                } else {
+                    setErrors({
+                        apiError: ['Ocorreu um erro inesperado :('],
+                    });
+                    setTimeout(() => {
+                        setErrors(null);
+                    }, 5000);
                 }
             });
     };
 
     return (
         <div>
-            { construction.id ? <h1>Editando Obra</h1> : <h1>Nova Obra</h1>}
+            { task.id ? <h1>Editando Tarefa</h1> : <h1>Nova Tarefa</h1>}
             <div className="card animated fadeInDown">
                 {loading && <div className="text-center common-text">Carregando...</div>}
                 { errors && (
@@ -74,13 +81,11 @@ export default function ConstructionForm() {
                 )}
                 {!loading && 
                     <form onSubmit={onSubmit}>
-                        <label htmlFor="name"><strong>Nome</strong></label>
-                        <input value={construction.name} onChange={ev => setConstruction({...construction, name: ev.target.value})} type="text" placeholder="Nome"/>
-                        <label htmlFor="description"><strong>Descrição</strong></label>
-                        <input value={construction.description} onChange={ev => setConstruction({...construction, description: ev.target.value})} type="text" placeholder="Descrição"/>
-                        <label htmlFor="description"><strong>Endereço / Localização</strong></label>
-                        <input value={construction.address} onChange={ev => setConstruction({...construction, address: ev.target.value})} type="text" placeholder="Endereço / Localização"/>
-                        <button className="btn mt-3" type="submit">Salvar</button>
+                        <label htmlFor="title" className="mb-1"><strong>Título</strong></label>
+                        <input value={task.title} onChange={ev => setTask({...task, title: ev.target.value})} type="text" placeholder="Nome"/>
+                        <label htmlFor="description" className="mb-1 mt-3"><strong>Descrição</strong></label>
+                        <textarea value={task.description} onChange={ev => setTask({...task, description: ev.target.value})} type="text" placeholder="Descrição"/>
+                        <button className="btn mt-4" type="submit">Salvar</button>
                     </form>
                 }
             </div>
