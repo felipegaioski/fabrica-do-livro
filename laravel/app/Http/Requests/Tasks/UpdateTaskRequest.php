@@ -25,7 +25,7 @@ class UpdateTaskRequest extends FormRequest
             'title' => ['required', 'string'],
             'description' => 'nullable',
             'status_id' => 'nullable',
-            'completed_at' => ['required_if:status_id,2', 'date'],
+            'completed_at' => ['required_if:status_id,2', 'date', 'nullable'],
         ];
     }
 

@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import axiosClient from "../api/axios-client.js";
 import { Link } from "react-router-dom";
 import { useStateContext } from "../contexts/ContextProvider.jsx";
 import { deleteTask, getTasks, updateTask } from "../services/TaskService.js";
@@ -44,8 +43,6 @@ export default function Tasks() {
         setLoading(true);
         getStatuses({}, [], [])
             .then(({ data }) => {
-                console.log(data);
-                
                 setStatuses(data.statuses);
             })
             .finally(() => setLoading(false));
