@@ -12,6 +12,7 @@
   --color-text-primary: #e0e0e0;    /* Main text */
   --color-text-secondary: #a0a0a0;  /* Less prominent text */
   --color-text-muted: #6c6c6c;      /* Placeholder/disabled text */
+  --color-text-danger: #ff6b6b;
 
   /* Primary Accent (Blue tone - can be changed) */
   --color-primary: #007be0;
@@ -141,7 +142,7 @@ input:focus {
 .btn-logout {
     text-decoration: none;
     padding: 0.75rem 1.5rem;
-    color: var(--color-text-primary) !important;
+    color: var(--color-text-danger) !important;
     transition: all 0.3s;
     border-radius: 6px;
     background-color: var(--color-surface) !important;
@@ -444,4 +445,8 @@ table > tbody > tr > td {
 
 .dashboard table th {
     background: #f4f4f4;
+}
+
+.sidemenu-icon {
+    padding: 0 0.5rem;
 }
