@@ -41,21 +41,21 @@ class AuditFormatter
                 return [
                     'id' => $audit->id,
                     'user' => $user,
-                    'event' => "Atualizou um(a) {$model}",
+                    'event' => "Atualizou o(a) {$model} # {$audit->auditable_id}",
                     'date' => $date
                 ];
             case 'deleted':
                 return [
                     'id' => $audit->id,
                     'user' => $user,
-                    'event' => "Deletou um(a) {$model}",
+                    'event' => "Deletou o(a) {$model} # {$audit->auditable_id}",
                     'date' => $date
                 ];
             default:
                 return [
                     'id' => $audit->id,
                     'user' => $user,
-                    'event' => "Fez uma ação em {$model}",
+                    'event' => "Fez uma ação em {$model} # {$audit->auditable_id}",
                     'date' => $date
                 ];
         }
